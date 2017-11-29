@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title>
+      Run Forest Run
+    </title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>
+      Run Forest Run
+    </h1>
+    <script type='text/javascript'>
+      $('document').ready(function() {
+        var CANVAS_WIDTH = 480;
+        var CANVAS_HEIGHT = 320;
+        var CANVAS_BACKGROUND = "black"
+
+        function draw_canvas(height, width, background) {
+          var canvasElement = $("<canvas width='" + width + "' height='" + height + "' style='background-color: " + background + "'></canvas>");
+          var canvas = canvasElement.get(0).getContext("2d");
+          canvasElement.appendTo('body');
+        }
+
+        draw_canvas(CANVAS_HEIGHT, CANVAS_WIDTH, CANVAS_BACKGROUND);
+      });
+    </script>
+  </body>
+</html>

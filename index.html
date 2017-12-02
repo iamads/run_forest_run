@@ -22,7 +22,15 @@
         }
 
         draw_canvas(CANVAS_HEIGHT, CANVAS_WIDTH, CANVAS_BACKGROUND);
+
+        $(document).keypress(function(e) {
+          if (e.which === 32 ) {
+            $('#appendHere').append("<li>spacebar pressed</li>");
+          }
+        });
       });
     </script>
+    <ol id="appendHere">
+    </ol>
   </body>
 </html>

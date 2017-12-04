@@ -13,15 +13,36 @@
       $('document').ready(function() {
         var CANVAS_WIDTH = 480;
         var CANVAS_HEIGHT = 320;
-        var CANVAS_BACKGROUND = "black"
+        var CANVAS_BACKGROUND = "black";
 
-        function draw_canvas(height, width, background) {
-          var canvasElement = $("<canvas width='" + width + "' height='" + height + "' style='background-color: " + background + "'></canvas>");
-          var canvas = canvasElement.get(0).getContext("2d");
-          canvasElement.appendTo('body');
+        var PLAYER_COLOR = "blue";
+        var PLAYER_X = 220;
+        var PLAYER_Y = 270;
+        var PLAYER_WIDTH = 32;
+        var PLAYER_HEIGHT = 32;
+
+        // Setting up canvas
+        var canvasElement = $("<canvas width='" + CANVAS_WIDTH + "' height='" + CANVAS_HEIGHT + "' style='background-color: " + CANVAS_BACKGROUND + "'></canvas>");
+        var canvas = canvasElement.get(0).getContext("2d");
+        canvasElement.appendTo('body');
+
+
+        // setting up player
+        var player = {
+          color: PLAYER_COLOR,
+          x: PLAYER_X,
+          y: PLAYER_Y,
+          width: PLAYER_WIDTH,
+          height: PLAYER_HEIGHT,
+          draw: function() {
+            var canvas = canvasElement.get(0).getContext("2d");
+            canvas.fillStyle = this.color;
+            canvas.fillRect(this.x, this.y, this.width, this.height);
+          } 
         }
 
-        draw_canvas(CANVAS_HEIGHT, CANVAS_WIDTH, CANVAS_BACKGROUND);
+        // this draws the player for first time
+        player.draw();
 
         $(document).keypress(function(e) {
           if (e.which === 32 ) {

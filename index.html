@@ -16,8 +16,8 @@
         var CANVAS_BACKGROUND = "black";
 
         var PLAYER_COLOR = "blue";
-        var PLAYER_X = 220;
-        var PLAYER_Y = 270;
+        var PLAYER_X = 120;
+        var PLAYER_Y = 170;
         var PLAYER_WIDTH = 32;
         var PLAYER_HEIGHT = 32;
 
@@ -25,6 +25,10 @@
         var canvasElement = $("<canvas width='" + CANVAS_WIDTH + "' height='" + CANVAS_HEIGHT + "' style='background-color: " + CANVAS_BACKGROUND + "'></canvas>");
         var canvas = canvasElement.get(0).getContext("2d");
         canvasElement.appendTo('body');
+
+        function clearCanvas(canvas) {
+          canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
+        }
 
 
         // setting up player
@@ -36,17 +40,34 @@
           height: PLAYER_HEIGHT,
           draw: function() {
             var canvas = canvasElement.get(0).getContext("2d");
+            clearCanvas(canvas);
             canvas.fillStyle = this.color;
             canvas.fillRect(this.x, this.y, this.width, this.height);
-          } 
+          }, 
+          jump: function() {
+            var that = this;
+            for (var j=0; j<100; j++) {
+              setTimeout(function() {
+                that.y-=1;
+                that.draw();
+              }, 100)
+            }
+            for (var i=0; i<100; i++) {
+              setTimeout(function() {
+                that.y+=1;
+                that.draw();
+              }, 100)
+            }
+          }
         }
 
         // this draws the player for first time
         player.draw();
+        player.jump();
 
         $(document).keypress(function(e) {
           if (e.which === 32 ) {
-            $('#appendHere').append("<li>spacebar pressed</li>");
+						player.jump();
           }
         });
       });
